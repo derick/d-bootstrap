@@ -1,10 +1,40 @@
-# d-scripts public bootstrap
+# d-bootstrap
 
-This directory contains the minimal public-safe bootstrap seed for Derick's Mac setup.
+Minimal public bootstrap seed for a Derick Mac.
 
-## Current seed
+This repo is intentionally tiny. It only:
 
-bootstrap-seed-v1.zsh
+- installs/verifies Homebrew
+- installs/verifies Dropbox
+- tells the user to sign into Dropbox
+- hands off to private `~/Dropbox/d-scripts`
+
+All private config, Brewfiles, dotfiles, and setup logic live in Dropbox.
+
+## Fresh Mac flow
+
+```zsh
+# 1. Run the public seed on a bare Mac
+/bin/bash -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/derick/d-bootstrap/main/bootstrap-seed-v1.zsh)"
+
+# 2. Open Dropbox, sign in, wait for ~/Dropbox/d-scripts to sync
+
+# 3. Run the private bootstrap
+~/Dropbox/d-scripts/bin/d-bootstrap-v1
+
+# 4. Install the Brewfile baseline
+d-brew-apply-v1
+
+# 5. Verify the machine is ready
+d-fresh-mac-verify-v1
+```
+
+For the full human checklist: `d-fresh-mac-checklist-v1`
+
+## Contents
+
+- `README.md` — this file
+- `bootstrap-seed-v1.zsh` — the public seed script
 
 ## Security model
 
@@ -31,54 +61,12 @@ It should not contain:
 - private setup logic
 - secrets or tokens
 
-## Intended future flow
+## Private Dropbox-side bootstrap flow
 
-Run the public seed from the eventual public repo URL.
+After Dropbox has synced `~/Dropbox/d-scripts`, run:
 
-Then run:
-
+```
 ~/Dropbox/d-scripts/bin/d-bootstrap-v1
+```
 
-## Current status
-
-This is local-only prep.
-
-Do not publish until the seed script has been reviewed separately.
-
-## Future public repo checklist
-
-Potential public repo purpose:
-
-- provide one minimal bootstrap seed for a new Derick Mac
-- install or verify Homebrew
-- install or verify Dropbox
-- direct the user back to the private Dropbox-side bootstrap flow
-
-Recommended public repo contents:
-
-- README.md
-- bootstrap-seed-v1.zsh
-
-Do not include:
-
-- Brewfile
-- config files
-- dotfiles
-- LaunchAgents
-- app inventory
-- machine inventory
-- ignore files
-- logs
-- state files
-- screenshots
-- secrets
-- tokens
-- private setup notes
-
-Pre-publish review:
-
-- run `d-review-public-bootstrap-v1`
-- inspect every file planned for the public repo
-- confirm the public repo contains only the seed and public README
-- confirm the seed does not reference private repo URLs
-- confirm the seed does not contain secrets, tokens, keys, or personal machine config
+The private bootstrap verifies the synced d-scripts structure, runs onboarding and safe structural repair, checks core tools, and runs status checks. It does not install the full Brewfile baseline — that is a separate explicit step (`d-brew-apply-v1`).

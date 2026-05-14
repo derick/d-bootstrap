@@ -4,6 +4,7 @@ set -u
 BOLD="\033[1m"
 RESET="\033[0m"
 CYAN="\033[36m"
+BLUE="\033[34m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
 RED="\033[31m"
@@ -80,16 +81,20 @@ fi
 
 section "Next steps"
 
-echo "1. Open Dropbox:"
+echo "${BLUE}${BOLD}1.${RESET} Open Dropbox and sign in:"
 echo "   open -a Dropbox"
 echo
-echo "2. Sign into Dropbox."
-echo
-echo "3. Wait for this folder to sync:"
+echo "${BLUE}${BOLD}2.${RESET} Wait for this folder to sync:"
 echo "   ~/Dropbox/d-scripts"
 echo
-echo "4. Then run:"
+echo "${BLUE}${BOLD}3.${RESET} Run the private bootstrap:"
 echo "   ~/Dropbox/d-scripts/bin/d-bootstrap-v1"
+echo
+echo "${BLUE}${BOLD}4.${RESET} Install the Brewfile baseline:"
+echo "   d-brew-apply-v1"
+echo
+echo "${BLUE}${BOLD}5.${RESET} Verify this machine is ready:"
+echo "   d-fresh-mac-verify-v1"
 echo
 echo "${YELLOW}${BOLD}REVIEW${RESET} This public seed intentionally does not contain private manifests, Brewfiles, dotfiles, app lists, LaunchAgents, or ignore rules."
 
