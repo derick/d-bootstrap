@@ -1,72 +1,51 @@
 # d-bootstrap
 
-Minimal public bootstrap seed for a Derick Mac.
+Minimal public bootstrap for Derick's Macs.
 
-This repo is intentionally tiny. It only:
+This repo only gets a fresh Mac far enough to install or verify:
 
-- installs/verifies Homebrew
-- installs/verifies Dropbox
-- tells the user to sign into Dropbox
-- hands off to private `~/Dropbox/d-scripts`
+- Homebrew
+- Dropbox
 
-All private config, Brewfiles, dotfiles, and setup logic live in Dropbox.
+After Dropbox syncs, the real setup continues from:
 
-## Fresh Mac flow
+    ~/Dropbox/d-scripts
 
-```zsh
-# 1. Run the public seed on a bare Mac
-/bin/bash -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/derick/d-bootstrap/main/bootstrap-seed-v1.zsh)"
+## Fresh Mac install
 
-# 2. Open Dropbox, sign in, wait for ~/Dropbox/d-scripts to sync
+Open Terminal and run this one command:
 
-# 3. Run the private bootstrap
-~/Dropbox/d-scripts/bin/d-bootstrap-v1
+    /usr/bin/curl -fsSL https://raw.githubusercontent.com/derick/d-bootstrap/main/bootstrap-seed.zsh -o /tmp/d-bootstrap-seed.zsh && /bin/zsh /tmp/d-bootstrap-seed.zsh
 
-# 4. Install the Brewfile baseline
-d-brew-apply-v1
+Do not copy/paste the raw script contents into Terminal.
 
-# 5. Verify the machine is ready
-d-fresh-mac-verify-v1
-```
+Run the one command above instead.
 
-For the full human checklist: `d-fresh-mac-checklist-v1`
+## What this does
 
-## Contents
+The bootstrap seed should:
 
-- `README.md` — this file
-- `bootstrap-seed-v1.zsh` — the public seed script
+1. Check whether Homebrew is installed.
+2. Install Homebrew if needed.
+3. Check whether Dropbox is installed.
+4. Install Dropbox if needed.
+5. Tell you to sign into Dropbox.
+6. Tell you to wait for ~/Dropbox/d-scripts to sync.
+7. Hand off to the private Dropbox-backed setup flow.
 
-## Security model
+## After Dropbox syncs
 
-The public seed should stay tiny.
+Run:
 
-It may:
+    ~/Dropbox/d-scripts/bin/d-bootstrap-v1
+    ~/Dropbox/d-scripts/bin/d-brew-apply
+    ~/Dropbox/d-scripts/bin/d-fresh-mac-checklist
+    ~/Dropbox/d-scripts/bin/d-fresh-mac-verify
+    ~/Dropbox/d-scripts/bin/d-verify-v1
 
-- check that the Mac is Apple Silicon
-- install Homebrew if missing
-- install Dropbox if missing
-- instruct the user to sign into Dropbox
-- instruct the user to wait for ~/Dropbox/d-scripts to sync
-- instruct the user to run the private Dropbox-side bootstrap command
+## Design notes
 
-It should not contain:
-
-- personal Brewfiles
-- dotfiles
-- manifests
-- app lists
-- LaunchAgents
-- ignore files
-- machine-specific config
-- private setup logic
-- secrets or tokens
-
-## Private Dropbox-side bootstrap flow
-
-After Dropbox has synced `~/Dropbox/d-scripts`, run:
-
-```
-~/Dropbox/d-scripts/bin/d-bootstrap-v1
-```
-
-The private bootstrap verifies the synced d-scripts structure, runs onboarding and safe structural repair, checks core tools, and runs status checks. It does not install the full Brewfile baseline — that is a separate explicit step (`d-brew-apply-v1`).
+- Keep this public repo intentionally tiny.
+- Do not put private setup logic here.
+- The real setup lives in ~/Dropbox/d-scripts.
+- The public repo exists only so a fresh Mac has a simple, reachable starting point.
