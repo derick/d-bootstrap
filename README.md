@@ -35,9 +35,10 @@ The bootstrap seed should:
 
 ## After Dropbox syncs
 
-Run the fresh-Mac verification trio first:
+Run the fresh-Mac verification block first:
 
     cd /Users/derick/Dropbox/d-scripts || exit 1
+    /bin/chmod +x bin/d-*
     bin/d-fresh-mac-checklist
     bin/d-fresh-mac-verify
     bin/d-verify
