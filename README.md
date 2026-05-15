@@ -7,6 +7,7 @@ This repo only gets a fresh Mac far enough to install or verify:
 - Homebrew
 - Dropbox
 - ChatGPT Desktop
+- Wispr Flow
 
 After Dropbox is signed in and key folders are made available offline, the real setup continues from:
 
@@ -34,10 +35,14 @@ The bootstrap seed should:
 6. Check whether ChatGPT Desktop is installed.
 7. Install ChatGPT Desktop if needed.
 8. Open ChatGPT.
-9. Tell you to sign into Dropbox.
-10. Tell you to make key Dropbox folders available offline.
-11. Tell you to sign into ChatGPT on the new Mac.
-12. Hand off to the private Dropbox-backed setup flow.
+9. Check whether Wispr Flow is installed.
+10. Install Wispr Flow if needed.
+11. Open Wispr Flow.
+12. Tell you to sign into Dropbox.
+13. Tell you to make key Dropbox folders available offline.
+14. Tell you to sign into ChatGPT on the new Mac.
+15. Tell you to sign into Wispr Flow and grant permissions.
+16. Hand off to the private Dropbox-backed setup flow.
 
 ## After Dropbox installs
 
@@ -49,8 +54,9 @@ The bootstrap seed should:
         /Users/derick/Dropbox/d-bootstrap
 
 4. Sign into ChatGPT on this Mac.
-5. Continue from ChatGPT on this Mac, not from another device.
-6. Then run:
+5. Sign into Wispr Flow and grant microphone/accessibility permissions if prompted.
+6. Continue from ChatGPT on this Mac, not from another device.
+7. Then run:
 
         cd /Users/derick/Dropbox/d-scripts || exit 1
         /bin/chmod +x bin/d-*

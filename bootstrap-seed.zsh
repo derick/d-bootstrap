@@ -81,6 +81,28 @@ blue "== Opening ChatGPT =="
 
 /usr/bin/open -a ChatGPT || true
 
+blue "== Checking Wispr Flow =="
+
+if [ -d "/Applications/Wispr Flow.app" ]; then
+  green "Wispr Flow.app found."
+else
+  yellow "Wispr Flow.app not found."
+  yellow "Installing Wispr Flow with Homebrew cask."
+
+  "$BREW_BIN" install --cask wispr-flow
+
+  if [ -d "/Applications/Wispr Flow.app" ]; then
+    green "Wispr Flow.app installed."
+  else
+    yellow "Wispr Flow install command finished, but /Applications/Wispr Flow.app was not found."
+    yellow "You can install Wispr Flow manually later if needed."
+  fi
+fi
+
+blue "== Opening Wispr Flow =="
+
+/usr/bin/open -a "Wispr Flow" || true
+
 blue "== Next steps =="
 
 /usr/bin/printf "\n"
@@ -92,8 +114,9 @@ printf "   /Users/derick/Dropbox/d-scripts\n"
 printf "   /Users/derick/Dropbox/d-bootstrap\n"
 /usr/bin/printf "\n"
 green "4. Sign into ChatGPT on this Mac."
-green "5. Continue from ChatGPT on this Mac, not from another device."
-green "6. Then run this fresh-Mac finish block:"
+green "5. Sign into Wispr Flow and grant microphone/accessibility permissions if prompted."
+green "6. Continue from ChatGPT on this Mac, not from another device."
+green "7. Then run this fresh-Mac finish block:"
 /usr/bin/printf "\n"
 printf "   cd /Users/derick/Dropbox/d-scripts || exit 1\n"
 printf "   /bin/chmod +x bin/d-*\n"
